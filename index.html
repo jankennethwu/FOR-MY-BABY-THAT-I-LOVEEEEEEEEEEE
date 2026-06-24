@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ═══ SCREEN 1: LOCK ═══ -->
+    <section id="lock-screen" class="active">
+        <div class="lock-container">
+            <div class="profile-frame">
+                <img src="https://i.ibb.co/35T48p2r/US-1.jpg" alt="Birthday Girl">
+                <p>Happy Birthday, Baby! 🎂</p>
+            </div>
+            <div class="pin-area">
+                <h3>ENTER PASSCODE</h3>
+                <div class="pin-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="numpad">
+                    <button onclick="pressKey('1')">1</button>
+                    <button onclick="pressKey('2')">2</button>
+                    <button onclick="pressKey('3')">3</button>
+                    <button onclick="pressKey('4')">4</button>
+                    <button onclick="pressKey('5')">5</button>
+                    <button onclick="pressKey('6')">6</button>
+                    <button onclick="pressKey('7')">7</button>
+                    <button onclick="pressKey('8')">8</button>
+                    <button onclick="pressKey('9')">9</button>
+                    <button></button>
+                    <button onclick="pressKey('0')">0</button>
+                    <button onclick="clearPin()">⌫</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SCREEN 1b: WRONG PIN ═══ -->
+    <section id="wrong-screen" class="hidden">
+        <div class="wrong-container">
+            <p class="wrong-hint">hint:</p>
+            <div class="wrong-date">
+                <span id="wrong-d1">0</span><span>/</span>
+                <span id="wrong-d2">0</span><span>/</span>
+                <span id="wrong-d3">0</span>
+            </div>
+            <p class="wrong-sub">try again, love 💕</p>
+        </div>
+    </section>
+
+    <!-- ═══ SCREEN 2: LOADING ═══ -->
+    <section id="loading-screen" class="hidden">
+        <div class="loading-container">
+            <h2>Hey you!! 🥰</h2>
+            <p>Loading your birthday surprise...</p>
+            <div class="spinner"></div>
+            <p class="ascii-face">(˘ᵕ˘)</p>
+        </div>
+    </section>
+
+    <!-- ═══ SCREEN 3: ENVELOPE / LETTER ═══ -->
+    <section id="surprise-screen" class="hidden">
+        <div class="surprise-container">
+            <h1 class="header-text">Happy Birthday, Baby! ❤️</h1>
+
+            <!-- Envelope that opens -->
+            <div class="envelope-wrap" id="envelope-wrap">
+                <div class="envelope" id="envelope" onclick="openEnvelope()">
+                    <div class="env-flap"></div>
+                    <div class="env-body">
+                        <div class="env-seal">❤️</div>
+                        <p class="env-tap">tap to open</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter (hidden until envelope is opened) -->
+            <div class="letter-reveal hidden" id="letter-reveal">
+                <div class="content-layout">
+                    <div class="letter-card">
+                        <h2>My Dearest,</h2>
+                        <p>Happy birthday, baby!</p>
+                        <p>For your special day, I wanted to create something completely unique for you because I feel like normal gifts just don't seem to do justice to how much you mean to me. I sat down and put this together piece by piece, thinking about you the entire time. Every line of code (with the help of AI of course), every color choice, and every photo here is a tiny reflection of the immense love I hold for you.</p>
+                        <p>Looking back at the time we've spent together, I am constantly amazed by how much brighter my world has become since you stepped into it. Your laugh is my favorite sound, your happiness is my biggest priority, and your beautiful heart is what I treasure most in this life.</p>
+                        <p>Thank you for being my safe space, my biggest supporter, and my best friend.</p>
+                        <p>With all my love,</p>
+                        <p><strong>Kenneth ❤️</strong></p>
+                    </div>
+                    <div class="photo-collage">
+                        <div class="polaroid"><img src="https://i.ibb.co/tM8YMw1f/MY-BABY-KO.jpg" alt="Us 1"></div>
+                        <div class="polaroid"><img src="https://i.ibb.co/zW9Qf7fv/US-2.jpg" alt="Us 2"></div>
+                    </div>
+                </div>
+                <button class="next-btn" onclick="goToCake()">Make a Wish! 🎂</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SCREEN 4: CAKE ═══ -->
+    <section id="cake-screen" class="hidden">
+        <div class="cake-container">
+            <h2>✨ Make a Wish ✨</h2>
+
+            <!-- CSS-drawn cake -->
+            <div class="cake" id="css-cake">
+                <div class="candles">
+                    <div class="candle"><div class="flame" id="f1"></div></div>
+                    <div class="candle"><div class="flame" id="f2"></div></div>
+                    <div class="candle"><div class="flame" id="f3"></div></div>
+                </div>
+                <div class="cake-top"></div>
+                <div class="cake-mid"></div>
+                <div class="cake-bottom"></div>
+                <div class="cake-plate"></div>
+            </div>
+
+            <button class="blow-btn" id="blow-btn" onclick="blowCandles()">Blow out candles! 🕯️</button>
+
+            <div id="celebration-msg" class="hidden">
+                <h1>🎉 I LOVE YOU! 🎉</h1>
+                <p>May all your wishes come true today and always. 🌟</p>
+            </div>
+        </div>
+    </section>
+
+    <audio id="bg-music" src="https://cdn.discordapp.com/attachments/1155094650084925510/1519188330473062450/Taylor_Swift_-_Lover_Official_Music_Video.mp3?ex=6a3ca5e3&is=6a3b5463&hm=9cfa6916e00368186a3e7397d45c7ff0cdb4523867b0ad472e4624d4ae7727fa&" loop></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
