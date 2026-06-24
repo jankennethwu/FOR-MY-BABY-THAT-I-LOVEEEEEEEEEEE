@@ -1,136 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tulips For You 🌷</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: radial-gradient(ellipse at 50% 30%, #2a0a1e 0%, #0d0010 60%, #000000 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Georgia', serif;
+  }
+
+  .scene {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to top, #0a1f0a, #0e2d0e);
+    border-radius: 60% 60% 0 0 / 30px 30px 0 0;
+  }
+
+  .grass-container {
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+  }
+  .grass {
+    width: 6px;
+    background: linear-gradient(to top, #0e2d0e, #2ecc71);
+    border-radius: 3px 3px 0 0;
+    transform-origin: bottom center;
+    animation: swayGrass 2.5s ease-in-out infinite;
+  }
+  @keyframes swayGrass {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+
+  .tulip-group {
+    position: absolute;
+    bottom: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: bottom center;
+  }
+  .tulip-group.sway  { animation: swayTulip 3s ease-in-out infinite; }
+  .tulip-group.sway2 { animation: swayTulip 3.6s ease-in-out infinite 0.4s; }
+  .tulip-group.sway3 { animation: swayTulip 2.8s ease-in-out infinite 0.8s; }
+  .tulip-group.sway4 { animation: swayTulip 3.3s ease-in-out infinite 1.2s; }
+  .tulip-group.sway5 { animation: swayTulip 3.1s ease-in-out infinite 0.2s; }
+
+  @keyframes swayTulip {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+
+  .stem {
+    width: 6px;
+    border-radius: 3px;
+    background: linear-gradient(to top, #1a5c1a, #27ae60);
+  }
+
+  .leaf {
+    position: absolute;
+    width: 28px;
+    height: 14px;
+    background: linear-gradient(135deg, #27ae60, #1a5c1a);
+    border-radius: 50% 50% 50% 0;
+    transform-origin: left center;
+  }
+  .leaf.left  { transform: rotate(30deg) translateX(-26px); border-radius: 0 50% 50% 50%; }
+  .leaf.right { transform: rotate(-30deg) translateX(4px);  border-radius: 50% 0 50% 50%; }
+
+  .tulip-head {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -2px;
+  }
+
+  .petal-back-left, .petal-back-right, .petal-back-mid,
+  .petal-front-left, .petal-front-right, .petal-front-mid {
+    position: absolute;
+    border-radius: 50% 50% 30% 30%;
+  }
+
+  .petal-back-left {
+    width: 22px; height: 38px;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%) rotate(-22deg);
+    transform-origin: bottom center;
+    z-index: 1;
+  }
+  .petal-back-right {
+    width: 22px; height: 38px;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%) rotate(22deg);
+    transform-origin: bottom center;
+    z-index: 1;
+  }
+  .petal-back-mid {
+    width: 22px; height: 40px;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%) rotate(0deg);
+    transform-origin: bottom center;
+    z-index: 1;
+  }
+  .petal-front-left {
+    width: 22px; height: 36px;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%) rotate(-14deg);
+    transform-origin: bottom center;
+    z-index: 3;
+  }
+  .petal-front-right {
+    width: 22px; height: 36px;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%) rotate(14deg);
+    transform-origin: bottom center;
+    z-index: 3;
+  }
+  .petal-front-mid {
+    width: 22px; height: 35px;
+    bottom: -2px; left: 50%;
+    transform: translateX(-50%) rotate(0deg);
+    transform-origin: bottom center;
+    z-index: 4;
+  }
+
+  .tulip-cup {
+    position: relative;
+    width: 52px;
+    height: 48px;
+  }
+
+  .sepal {
+    position: absolute;
+    bottom: -4px; left: 50%;
+    transform: translateX(-50%);
+    width: 18px; height: 10px;
+    background: linear-gradient(to top, #27ae60, #2ecc71);
+    border-radius: 0 0 50% 50%;
+    z-index: 5;
+  }
+
+  .pink .petal-back-left,  .pink .petal-back-right, .pink .petal-back-mid  { background: #c0255a; }
+  .pink .petal-front-left, .pink .petal-front-right, .pink .petal-front-mid { background: #e8588a; }
+
+  .red .petal-back-left,  .red .petal-back-right, .red .petal-back-mid  { background: #8b0000; }
+  .red .petal-front-left, .red .petal-front-right, .red .petal-front-mid { background: #cc2200; }
+
+  .purple .petal-back-left,  .purple .petal-back-right, .purple .petal-back-mid  { background: #5a1080; }
+  .purple .petal-front-left, .purple .petal-front-right, .purple .petal-front-mid { background: #8e3aad; }
+
+  .yellow .petal-back-left,  .yellow .petal-back-right, .yellow .petal-back-mid  { background: #b8860b; }
+  .yellow .petal-front-left, .yellow .petal-front-right, .yellow .petal-front-mid { background: #f0c000; }
+
+  .orange .petal-back-left,  .orange .petal-back-right, .orange .petal-back-mid  { background: #b84800; }
+  .orange .petal-front-left, .orange .petal-front-right, .orange .petal-front-mid { background: #e86a00; }
+
+  .msg {
+    position: absolute;
+    background: rgba(120, 0, 50, 0.75);
+    color: #ffc8d8;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    box-shadow: 0 0 12px rgba(200,50,100,0.4);
+    opacity: 0;
+    animation: floatMsg 5s ease-in-out infinite;
+  }
+  .msg::after { content: ' ♥'; color: #ff6090; }
+  @keyframes floatMsg {
+    0%   { opacity: 0; transform: translateY(10px); }
+    20%  { opacity: 1; transform: translateY(0);    }
+    80%  { opacity: 1; transform: translateY(-6px); }
+    100% { opacity: 0; transform: translateY(-14px);}
+  }
+
+  .sparkle {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 2.5s ease-in-out infinite;
+    opacity: 0;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 0.85; transform: scale(1.2); }
+  }
+
+  .grow {
+    animation-name: growUp;
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation-fill-mode: both;
+  }
+  @keyframes growUp {
+    from { transform: scaleY(0); opacity: 0; }
+    to   { transform: scaleY(1); opacity: 1; }
+  }
+
+  .title {
+    position: absolute;
+    top: 36px;
+    width: 100%;
+    text-align: center;
+    color: #ffc8d8;
+    font-size: 22px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 18px rgba(255,100,160,0.6);
+    opacity: 0;
+    animation: fadeIn 1s ease 0.5s forwards;
+  }
+  .title span { font-size: 28px; }
+  @keyframes fadeIn { to { opacity: 1; } }
+</style>
 </head>
 <body>
+<div class="scene">
 
-    <!-- ═══ SCREEN 1: LOCK ═══ -->
-    <section id="lock-screen" class="active">
-        <div class="lock-container">
-            <div class="profile-frame">
-                <img src="https://i.ibb.co/35T48p2r/US-1.jpg" alt="Birthday Girl">
-                <p>Happy Birthday, Baby! 🎂</p>
-            </div>
-            <div class="pin-area">
-                <h3>ENTER PASSCODE</h3>
-                <div class="pin-dots">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
-                <div class="numpad">
-                    <button onclick="pressKey('1')">1</button>
-                    <button onclick="pressKey('2')">2</button>
-                    <button onclick="pressKey('3')">3</button>
-                    <button onclick="pressKey('4')">4</button>
-                    <button onclick="pressKey('5')">5</button>
-                    <button onclick="pressKey('6')">6</button>
-                    <button onclick="pressKey('7')">7</button>
-                    <button onclick="pressKey('8')">8</button>
-                    <button onclick="pressKey('9')">9</button>
-                    <button></button>
-                    <button onclick="pressKey('0')">0</button>
-                    <button onclick="clearPin()">⌫</button>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="title"><span>🌷</span> Tulips For You <span>🌷</span></div>
 
-    <!-- ═══ SCREEN 1b: WRONG PIN ═══ -->
-    <section id="wrong-screen" class="hidden">
-        <div class="wrong-container">
-            <p class="wrong-hint">hint:</p>
-            <div class="wrong-date">
-                <span id="wrong-d1">0</span><span>/</span>
-                <span id="wrong-d2">0</span><span>/</span>
-                <span id="wrong-d3">0</span>
-            </div>
-            <p class="wrong-sub">try again, love 💕</p>
-        </div>
-    </section>
+  <div class="sparkle" style="top:12%;left:18%;animation-delay:0s;"></div>
+  <div class="sparkle" style="top:8%; left:50%;animation-delay:0.8s;"></div>
+  <div class="sparkle" style="top:20%;left:78%;animation-delay:1.5s;"></div>
+  <div class="sparkle" style="top:30%;left:32%;animation-delay:0.3s;"></div>
+  <div class="sparkle" style="top:15%;left:62%;animation-delay:2.1s;"></div>
+  <div class="sparkle" style="top:25%;left:85%;animation-delay:0.6s;"></div>
+  <div class="sparkle" style="top:35%;left:10%;animation-delay:1.1s;width:3px;height:3px;"></div>
+  <div class="sparkle" style="top:40%;left:90%;animation-delay:1.8s;width:3px;height:3px;"></div>
 
-    <!-- ═══ SCREEN 2: LOADING ═══ -->
-    <section id="loading-screen" class="hidden">
-        <div class="loading-container">
-            <h2>Hey you!! 🥰</h2>
-            <p>Loading your birthday surprise...</p>
-            <div class="spinner"></div>
-            <p class="ascii-face">(˘ᵕ˘)</p>
-        </div>
-    </section>
+  <div class="msg" style="top:28%;left:4%;animation-delay:0s;">You are my favourite person</div>
+  <div class="msg" style="top:42%;right:4%;animation-delay:1.4s;">I'm lucky to have you</div>
+  <div class="msg" style="top:58%;left:3%;animation-delay:2.6s;">You make my world brighter</div>
+  <div class="msg" style="top:68%;right:3%;animation-delay:0.7s;">Every tulip reminds me of you</div>
+  <div class="msg" style="top:76%;left:30%;animation-delay:3.5s;">Forever grateful for you</div>
 
-    <!-- ═══ SCREEN 3: ENVELOPE / LETTER ═══ -->
-    <section id="surprise-screen" class="hidden">
-        <div class="surprise-container">
-            <h1 class="header-text">Happy Birthday, Baby! ❤️</h1>
+  <div class="ground"></div>
 
-            <!-- Envelope that opens -->
-            <div class="envelope-wrap" id="envelope-wrap">
-                <div class="envelope" id="envelope" onclick="openEnvelope()">
-                    <div class="env-flap"></div>
-                    <div class="env-body">
-                        <div class="env-seal">❤️</div>
-                        <p class="env-tap">tap to open</p>
-                    </div>
-                </div>
-            </div>
+  <div class="grass-container">
+    <div class="grass" style="height:55px;animation-delay:0s;"></div>
+    <div class="grass" style="height:40px;animation-delay:0.3s;"></div>
+    <div class="grass" style="height:65px;animation-delay:0.6s;"></div>
+    <div class="grass" style="height:50px;animation-delay:0.2s;"></div>
+    <div class="grass" style="height:70px;animation-delay:0.9s;"></div>
+    <div class="grass" style="height:45px;animation-delay:0.5s;"></div>
+    <div class="grass" style="height:60px;animation-delay:0.1s;"></div>
+    <div class="grass" style="height:35px;animation-delay:0.7s;"></div>
+    <div class="grass" style="height:55px;animation-delay:0.4s;"></div>
+    <div class="grass" style="height:48px;animation-delay:0.8s;"></div>
+    <div class="grass" style="height:62px;animation-delay:0.15s;"></div>
+    <div class="grass" style="height:42px;animation-delay:0.55s;"></div>
+  </div>
 
-            <!-- Letter (hidden until envelope is opened) -->
-            <div class="letter-reveal hidden" id="letter-reveal">
-                <div class="content-layout">
-                    <div class="letter-card">
-                        <h2>My Dearest,</h2>
-                        <p>Happy birthday, baby!</p>
-                        <p>For your special day, I wanted to create something completely unique for you because I feel like normal gifts just don't seem to do justice to how much you mean to me. I sat down and put this together piece by piece, thinking about you the entire time. Every line of code (with the help of AI of course), every color choice, and every photo here is a tiny reflection of the immense love I hold for you.</p>
-                        <p>Looking back at the time we've spent together, I am constantly amazed by how much brighter my world has become since you stepped into it. Your laugh is my favorite sound, your happiness is my biggest priority, and your beautiful heart is what I treasure most in this life.</p>
-                        <p>Thank you for being my safe space, my biggest supporter, and my best friend.</p>
-                        <p>With all my love,</p>
-                        <p><strong>Kenneth ❤️</strong></p>
-                    </div>
-                    <div class="photo-collage">
-                        <div class="polaroid"><img src="https://i.ibb.co/tM8YMw1f/MY-BABY-KO.jpg" alt="Us 1"></div>
-                        <div class="polaroid"><img src="https://i.ibb.co/zW9Qf7fv/US-2.jpg" alt="Us 2"></div>
-                    </div>
-                </div>
-                <button class="next-btn" onclick="goToCake()">Make a Wish! 🎂</button>
-            </div>
-        </div>
-    </section>
+  <!-- TULIP 1 — red, center -->
+  <div class="tulip-group sway" style="left:50%;transform:translateX(-50%);">
+    <div class="tulip-head red">
+      <div class="tulip-cup">
+        <div class="petal-back-left"></div>
+        <div class="petal-back-right"></div>
+        <div class="petal-back-mid"></div>
+        <div class="petal-front-left"></div>
+        <div class="petal-front-right"></div>
+        <div class="petal-front-mid"></div>
+      </div>
+      <div class="sepal"></div>
+    </div>
+    <div class="grow" style="animation-duration:0.9s;animation-delay:0.2s;position:relative;">
+      <div class="stem" style="height:160px;"></div>
+      <div class="leaf left"  style="bottom:90px;"></div>
+      <div class="leaf right" style="bottom:55px;"></div>
+    </div>
+  </div>
 
-    <!-- ═══ SCREEN 4: CAKE ═══ -->
-    <section id="cake-screen" class="hidden">
-        <div class="cake-container">
-            <h2>✨ Make a Wish ✨</h2>
+  <!-- TULIP 2 — pink, left of center -->
+  <div class="tulip-group sway2" style="left:34%;">
+    <div class="tulip-head pink">
+      <div class="tulip-cup">
+        <div class="petal-back-left"></div>
+        <div class="petal-back-right"></div>
+        <div class="petal-back-mid"></div>
+        <div class="petal-front-left"></div>
+        <div class="petal-front-right"></div>
+        <div class="petal-front-mid"></div>
+      </div>
+      <div class="sepal"></div>
+    </div>
+    <div class="grow" style="animation-duration:0.9s;animation-delay:0.5s;position:relative;">
+      <div class="stem" style="height:130px;"></div>
+      <div class="leaf left"  style="bottom:70px;"></div>
+      <div class="leaf right" style="bottom:40px;"></div>
+    </div>
+  </div>
 
-            <!-- CSS-drawn cake -->
-            <div class="cake" id="css-cake">
-                <div class="candles">
-                    <div class="candle"><div class="flame" id="f1"></div></div>
-                    <div class="candle"><div class="flame" id="f2"></div></div>
-                    <div class="candle"><div class="flame" id="f3"></div></div>
-                </div>
-                <div class="cake-top"></div>
-                <div class="cake-mid"></div>
-                <div class="cake-bottom"></div>
-                <div class="cake-plate"></div>
-            </div>
+  <!-- TULIP 3 — purple, right of center -->
+  <div class="tulip-group sway3" style="left:64%;">
+    <div class="tulip-head purple">
+      <div class="tulip-cup">
+        <div class="petal-back-left"></div>
+        <div class="petal-back-right"></div>
+        <div class="petal-back-mid"></div>
+        <div class="petal-front-left"></div>
+        <div class="petal-front-right"></div>
+        <div class="petal-front-mid"></div>
+      </div>
+      <div class="sepal"></div>
+    </div>
+    <div class="grow" style="animation-duration:0.9s;animation-delay:0.8s;position:relative;">
+      <div class="stem" style="height:145px;"></div>
+      <div class="leaf left"  style="bottom:80px;"></div>
+      <div class="leaf right" style="bottom:50px;"></div>
+    </div>
+  </div>
 
-            <button class="blow-btn" id="blow-btn" onclick="blowCandles()">Blow out candles! 🕯️</button>
+  <!-- TULIP 4 — yellow, far left -->
+  <div class="tulip-group sway4" style="left:18%;">
+    <div class="tulip-head yellow">
+      <div class="tulip-cup">
+        <div class="petal-back-left"></div>
+        <div class="petal-back-right"></div>
+        <div class="petal-back-mid"></div>
+        <div class="petal-front-left"></div>
+        <div class="petal-front-right"></div>
+        <div class="petal-front-mid"></div>
+      </div>
+      <div class="sepal"></div>
+    </div>
+    <div class="grow" style="animation-duration:0.9s;animation-delay:1.1s;position:relative;">
+      <div class="stem" style="height:110px;"></div>
+      <div class="leaf left"  style="bottom:60px;"></div>
+      <div class="leaf right" style="bottom:32px;"></div>
+    </div>
+  </div>
 
-            <div id="celebration-msg" class="hidden">
-                <h1>🎉 I LOVE YOU! 🎉</h1>
-                <p>May all your wishes come true today and always. 🌟</p>
-            </div>
-        </div>
-    </section>
+  <!-- TULIP 5 — orange, far right -->
+  <div class="tulip-group sway5" style="left:80%;">
+    <div class="tulip-head orange">
+      <div class="tulip-cup">
+        <div class="petal-back-left"></div>
+        <div class="petal-back-right"></div>
+        <div class="petal-back-mid"></div>
+        <div class="petal-front-left"></div>
+        <div class="petal-front-right"></div>
+        <div class="petal-front-mid"></div>
+      </div>
+      <div class="sepal"></div>
+    </div>
+    <div class="grow" style="animation-duration:0.9s;animation-delay:1.4s;position:relative;">
+      <div class="stem" style="height:120px;"></div>
+      <div class="leaf left"  style="bottom:65px;"></div>
+      <div class="leaf right" style="bottom:38px;"></div>
+    </div>
+  </div>
 
-    <audio id="bg-music" src="https://cdn.discordapp.com/attachments/1155094650084925510/1519188330473062450/Taylor_Swift_-_Lover_Official_Music_Video.mp3?ex=6a3ca5e3&is=6a3b5463&hm=9cfa6916e00368186a3e7397d45c7ff0cdb4523867b0ad472e4624d4ae7727fa&" loop></audio>
-
-    <script src="script.js"></script>
+</div>
 </body>
 </html>
